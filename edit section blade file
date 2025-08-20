@@ -30,13 +30,13 @@
                                                                     <td data-name="stitle">
                                                                         @if (isset($v['blade']))
                                                                             @include(
-                                                                                'admin.section.' .
+                                                                                'admin.section.post.' .
                                                                                     $v['blade'],
                                                                                 ['k' => $k, 'firstrow' => true]
                                                                             )
                                                                         @else
                                                                             @include(
-                                                                                'admin.section.fields',
+                                                                                'admin.section.post.fields',
                                                                                 ['k' => $k, 'firstrow' => true]
                                                                             )
                                                                         @endif
@@ -61,13 +61,13 @@
                                                                         <td data-name="{{ $k }}stitle">
                                                                             @if (isset($v['blade']))
                                                                                 @include(
-                                                                                    'admin.section.' .
+                                                                                    'admin.section.post.' .
                                                                                         $v['blade'],
                                                                                     ['k' => $k, 'edit' => true]
                                                                                 )
                                                                             @else
                                                                                 @include(
-                                                                                    'admin.section.fields',
+                                                                                    'admin.section.post.fields',
                                                                                     ['k' => $k, 'edit' => true]
                                                                                 )
                                                                             @endif
