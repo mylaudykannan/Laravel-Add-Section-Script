@@ -1,0 +1,12 @@
+$post['pointslug'] = 'new';
+        //adding default config to all
+        $configar = config('post.section.' . $post['pointslug']);
+        foreach (config('post.section.default') as $confdk => $confdv) {
+            $configar[$confdk] = $confdv;
+        }
+        config(['post.section.' . $post['pointslug'] => $configar]);
+        //end
+        $data['post'] = $post;
+        $data['slug'] = 'new';
+
+return view('admin.post.create', $data);
