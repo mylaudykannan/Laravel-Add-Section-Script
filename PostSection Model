@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+// use App\Models\post;
+
+class PostSection extends Model
+{
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'post_section'; // explicitly set since it's singular
+
+    protected $fillable = [
+        'title',
+        'content',
+        'image',
+        'slug',
+        'parent',
+        'type',
+        'post_id',
+        'order',
+    ];
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class,'post_id','id');
+    }
+
+    public function children(){
+        return $this->hasMany(PostSection::class,'parent','id');
+    }
+}
