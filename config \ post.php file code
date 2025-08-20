@@ -1,0 +1,73 @@
+<?php
+return [
+    'section' => [
+        'default' => [
+            'content' => [
+                'title' => 'Content',
+                // 'blade' => 'breadcrump',
+                // 'static' => true,
+                'fields' => [
+                    'content' => ['validation' => 'required', 'type' => 'editor']//,'allowed' => 'page'
+                ]
+            ],
+        ],
+        /* 'home' => [
+            'slider' => [
+                'title' => 'Slider',
+                'template' => 'home.slider',
+                // 'blade' => 'breadcrump',
+                // 'static' => true,
+                'fields' => [
+                    'image' => ['validation' => 'required', 'type' => 'image'],//,'allowed' => 'page'
+                    'title' => ['validation' => '', 'type' => 'input'],//,'allowed' => 'page'
+                    'subtitle' => ['validation' => '', 'type' => 'input']//,'allowed' => 'page'
+                ]
+            ],
+            'grid-item' => [
+                'title' => 'Grid Items',
+                'template' => 'home.grid',
+                // 'blade' => 'breadcrump',
+                // 'static' => true,
+                'fields' => [
+                    'title' => ['validation' => 'required', 'type' => 'input'],//,'allowed' => 'page'
+                    'image' => ['validation' => 'required', 'type' => 'image'],//,'allowed' => 'page'
+                    'content' => ['validation' => 'required', 'type' => 'input'],//,'allowed' => 'page'
+                    'link' => ['validation' => '', 'type' => 'input'],//,'allowed' => 'page'
+                ]
+            ],
+            'about' => [
+                'title' => 'About',
+                // 'template' => 'home.grid',
+                // 'blade' => 'breadcrump',
+                // 'static' => true,
+                'fields' => [
+                    'content' => ['validation' => 'required', 'type' => 'editor'],//,'allowed' => 'page'
+                ]
+            ],
+            'faq' => [
+                'title' => 'FAQ',
+                'template' => 'home.faq',
+                // 'blade' => 'breadcrump',
+                'static' => true,
+                'fields' => [
+                    'title' => ['validation' => 'required', 'type' => 'input'],//,'allowed' => 'page'
+                    'subtitle' => ['validation' => 'required', 'type' => 'input'],//,'allowed' => 'page'
+                    'image' => ['validation' => 'required', 'type' => 'image'],//,'allowed' => 'page'
+                    'faq' => ['validation' => '', 'type' => 'button', 'link' => 'page/edit/faq'],//,'allowed' => 'page'
+                ]
+            ],
+        ],
+        'faq' => [
+            'question' => [
+                'title' => 'FAQ Content',
+                // 'blade' => 'breadcrump',
+                // 'static' => true,
+                'fields' => [
+                    'title' => ['validation' => 'required', 'type' => 'input'],//,'allowed' => 'page'
+                    'content' => ['validation' => 'required', 'type' => 'editor']//,'allowed' => 'page'
+                ]
+            ],
+        ], */
+    ]
+];
+?>
