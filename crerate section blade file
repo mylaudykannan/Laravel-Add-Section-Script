@@ -25,9 +25,9 @@
                                                 class="@if(!config('post.section.'.$post['pointslug'].'.'.$k.'.static')) hidden novalidation @endif ">
                                                 <td data-name="stitle">
                                                     @if(isset($v['blade']))
-                                                    @include('admin.section.'.$v['blade'],['k'=>$k,'firstrow'=>true])
+                                                    @include('admin.section.post.'.$v['blade'],['k'=>$k,'firstrow'=>true])
                                                     @else
-                                                    @include('admin.section.fields',['k'=>$k,'firstrow'=>true])
+                                                    @include('admin.section.post.fields',['k'=>$k,'firstrow'=>true])
                                                     @endif
                                                 </td>
                                                 @if(!config('post.section.'.$post['pointslug'].'.'.$k.'.static'))
