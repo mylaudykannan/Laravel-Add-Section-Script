@@ -1,0 +1,9 @@
+public function destroysection($id)
+    {
+        $page = PageSection::find($id);
+        $page->delete();
+        $page = PageSection::where('parent', $id);
+        $page->delete();
+        // $message = array('message.level' => 'alert-success', 'message.content' => 'Page Sectin Deleted');
+        return redirect()->back()->with('message', 'Sectin Deleted');
+    }
