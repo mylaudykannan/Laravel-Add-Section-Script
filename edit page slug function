@@ -1,0 +1,5 @@
+public function editPage($slug)
+    {
+        $page = Page::where('slug', $slug)->firstOrFail();
+        return $this->edit($page);
+    }
