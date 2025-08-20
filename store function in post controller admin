@@ -1,0 +1,74 @@
+/***sectin update */
+        $configar = config('post.section.' . $post->slug);
+        foreach (config('post.section.default') as $confdk => $confdv) {
+            $configar[$confdk] = $confdv;
+        }
+        config(['post.section.' . $post->slug => $configar]);
+        if (config('post.section.' . $post->slug)) {
+            foreach (config('post.section.' . $post->slug) as $k => $v) {
+                if (isset($v['static'])) {
+                    $content = [];
+                    $sectionvalidation = [];
+                    $sectionvalidationmessage = [];
+                    $itemslug = '';
+                    foreach ($v['fields'] as $fk => $fv) {
+                        if (isset($fv['validation'])) {
+                            $sectionvalidation[$k . $fk] = $fv['validation'];
+                        }
+                        if (isset($fv['message'])) {
+                            foreach ($fv['message'] as $fvmk => $fvmv) {
+                                $sectionvalidationmessage[$k . $fk . '.' . $fvmk] = $fvmv;
+                            }
+                        }
+                        $content[$fk] = $request->input($k . $fk);
+                        if (isset($v['slug']) && $v['slug'] == $fk) {
+                            $itemslug = Str::slug($request->input($k . $fk));
+                        }
+                    }
+                    $validatedData = $request->validate(
+                        $sectionvalidation,
+                        $sectionvalidationmessage
+                    );
+
+                    $sectioncontent = json_encode($content);
+                    $match = ['type' => $k, 'post_id' => $post->id];
+                    $data = ['title' => $k, 'type' => $k, 'content' => $sectioncontent, 'order' => 0, 'post_id' => $post->id, 'slug' => $itemslug];
+                    PostSection::updateOrCreate($match, $data);
+                } else {
+                    $sectionvalidation = [];
+                    $sectionvalidationmessage = [];
+                    for ($i = 1; $i <= $request->input('loopcount' . $k); $i++) {
+                        $content = [];
+                        $itemslug = '';
+                        foreach ($v['fields'] as $fk => $fv) {
+                            if (isset($fv['validation'])) {
+                                $sectionvalidation[$k . $fk . $i] = $fv['validation'];
+                            }
+                            if (isset($fv['message'])) {
+                                foreach ($fv['message'] as $fvmk => $fvmv) {
+                                    $sectionvalidationmessage[$k . $fk . $i . '.' . $fvmk] = $fvmv;
+                                }
+                            }
+
+
+                            $content[$fk] = $request->input($k . $fk . $i);
+                            if (isset($v['slug']) && $v['slug'] == $fk) {
+                                $itemslug = Str::slug($request->input($k . $fk . $i));
+                            }
+                        }
+                        $validatedData = $request->validate(
+                            $sectionvalidation,
+                            $sectionvalidationmessage
+                        );
+                        $sectioncontent = json_encode($content);
+                        $match = ['type' => $k, 'post_id' => $post->id, 'order' => $i];
+                        $data = ['title' => $post->slug, 'type' => $k, 'content' => $sectioncontent, 'order' => $i, 'post_id' => $post->id, 'slug' => $itemslug];
+                        if (config('post.section.' . $post->slug . '.' . $k . '.parent')) {
+                            $data['parent'] = $request->input($k . config('post.section.' . $post->slug . '.' . $k . '.parent') . $i);
+                        }
+                        PostSection::updateOrCreate($match, $data);
+                    }
+                }
+            }
+        }
+        /* end section update */
