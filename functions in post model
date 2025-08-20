@@ -1,0 +1,7 @@
+class Post extends Model
+{
+public function sections()
+    {
+        return $this->hasMany(PageSection::class, 'page_id', 'id')->orderBy('order', 'ASC');
+    }
+}
