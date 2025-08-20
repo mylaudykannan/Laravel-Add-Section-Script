@@ -1,0 +1,64 @@
+@if(!empty($post) && config('post.section.'.$post['pointslug']))
+                @foreach(config('post.section.'.$post['pointslug']) as $k => $v)
+                <div class="card customCard transparent">
+
+                    <div class="card-body pt-2">
+
+
+
+                        <div class="">
+                            <div class="row clearfix">
+                                <div class="col-md-12 table-responsive">
+                                    <table id="tab_logic{{$k}}" class="table table-bordered table-hover table-sortable">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">{{$v['title']}}</th>
+                                                @if(!config('post.section.'.$post['pointslug'].'.'.$k.'.static'))
+                                                <th class="text-center"
+                                                    style="border-top: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255);width:100px;">
+                                                </th>
+                                                @endif
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="{{$k}}addr0" data-id="0"
+                                                class="@if(!config('post.section.'.$post['pointslug'].'.'.$k.'.static')) hidden novalidation @endif ">
+                                                <td data-name="stitle">
+                                                    @if(isset($v['blade']))
+                                                    @include('admin.section.'.$v['blade'],['k'=>$k,'firstrow'=>true])
+                                                    @else
+                                                    @include('admin.section.fields',['k'=>$k,'firstrow'=>true])
+                                                    @endif
+                                                </td>
+                                                @if(!config('post.section.'.$post['pointslug'].'.'.$k.'.static'))
+                                                <td data-name="del"><button name="{{$k}}del0"
+                                                        class="btn btn-danger row-remove d-none"><i
+                                                            class="far fa-trash-alt"></i></button>
+                                                    <span class="moveupbtn" title="Move Up"><i
+                                                            class="fas fa-arrow-alt-circle-up"></i></span>
+                                                    <span class="movedownbtn" title="Move Down"><i
+                                                            class="fas fa-arrow-alt-circle-down"></i></span>
+                                                </td>
+                                                @endif
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            @if(!config('post.section.'.$post['pointslug'].'.'.$k.'.static'))
+                            <a id="add_row{{$k}}" class="btn btn-primary pull-left text-white add_row"
+                                data-section="{{$k}}">Add Row</a><input type="hidden" name="loopcount{{$k}}" value="0"
+                                id="loopcount{{$k}}">
+                            @endif
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <hr>
+                @endforeach
+                @endif
