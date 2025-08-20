@@ -1,5 +1,5 @@
-public function editPage($slug)
+public function editPost($slug)
     {
-        $page = Page::where('slug', $slug)->firstOrFail();
-        return $this->edit($page);
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return $this->edit($post);
     }
