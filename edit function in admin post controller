@@ -1,0 +1,20 @@
+/**Section update code */
+        $configar = config('post.section.' . $post->slug);
+        if (!config('post.section.' . $post->slug)) {
+            foreach (config('post.section.default') as $confdk => $confdv) {
+                if ($confdk == 'content' && config('post.hide-content.' . $post->slug)) {
+                    continue;
+                }
+                $configar[$confdk] = $confdv;
+            }
+        }
+        config(['post.section.' . $post->slug => $configar]);
+
+        if (!empty($post) && config('post.section.' . $post->slug)) {
+            foreach (config('post.section.' . $post->slug) as $k => $v) {
+                $postsections[$k] = PostSection::with('children')->where('post_id', $post->id)->where('type', $k)->orderBy('order', 'ASC')->get()->toArray();
+            }
+        }
+        /**End Section update code */
+
+return view('admin.post.edit', ['post' => $post, 'slug' => $post->slug, 'postsections' => $postsections]);
